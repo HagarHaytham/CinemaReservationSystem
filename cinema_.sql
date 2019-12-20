@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2019 at 09:26 PM
+-- Generation Time: Dec 12, 2019 at 04:37 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.0.23
 
@@ -61,31 +61,6 @@ CREATE TABLE `screen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `screenseats`
---
-
-CREATE TABLE `screenseats` (
-  `ScreenNo` int(11) NOT NULL,
-  `Row` int(11) NOT NULL,
-  `Col` int(11) NOT NULL,
-  `Value` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ticket`
---
-
-CREATE TABLE `ticket` (
-  `TicketNo` int(11) NOT NULL,
-  `Username` varchar(250) NOT NULL,
-  `MovieName` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -123,20 +98,6 @@ ALTER TABLE `screen`
   ADD PRIMARY KEY (`screenno`);
 
 --
--- Indexes for table `screenseats`
---
-ALTER TABLE `screenseats`
-  ADD PRIMARY KEY (`ScreenNo`,`Row`,`Col`);
-
---
--- Indexes for table `ticket`
---
-ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`TicketNo`),
-  ADD KEY `FK_ticket` (`Username`),
-  ADD KEY `FK_ticket01` (`MovieName`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -157,19 +118,6 @@ ALTER TABLE `movie`
 --
 ALTER TABLE `movietimes`
   ADD CONSTRAINT `movietimes_ibfk_1` FOREIGN KEY (`MovieName`) REFERENCES `movie` (`moviename`);
-
---
--- Constraints for table `screenseats`
---
-ALTER TABLE `screenseats`
-  ADD CONSTRAINT `FK_screenno` FOREIGN KEY (`ScreenNo`) REFERENCES `screen` (`screenno`);
-
---
--- Constraints for table `ticket`
---
-ALTER TABLE `ticket`
-  ADD CONSTRAINT `FK_ticket` FOREIGN KEY (`Username`) REFERENCES `user` (`username`),
-  ADD CONSTRAINT `FK_ticket01` FOREIGN KEY (`MovieName`) REFERENCES `movie` (`moviename`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
