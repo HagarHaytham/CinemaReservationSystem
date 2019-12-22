@@ -1,46 +1,70 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "../css/Login.css";
 
-function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
+class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      username: '',
+      password: ''
+    }
   }
 
-  function handleSubmit(event) {
+  handleSubmit(event){
     event.preventDefault();
+    var apiBaseUrl = "http://localhost/backend/login.php";
+    var payload= 'username='+ this.state.username+ '&password='+this.state.password;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", apiBaseUrl, true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");     
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.send(payload);
   }
 
-  return (
-    <div className="Login">
-      {/* <img src={require("../images/mac.jpg")} className="background" alt="cinma" /> */}
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <FormLabel>Email</FormLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <FormLabel>Password</FormLabel>
-          <FormControl
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-          />
-        </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
-          Login
-        </Button>
-      </form>
-    </div>
-  );
-}
+  componentDidMount(){
 
-export default Login
+  }
+
+  render(){
+    return (
+      <div className="Login">
+        {/* <form onSubmit={handleSubmit}> */}
+        <form  className="form" onSubmit={(event) => this.handleSubmit(event)} method="POST">
+          <FormGroup controlId="username" bssize="large">
+            <FormLabel className="FormLabel"> Username </FormLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              required="required"
+              name="username"
+              // value={email}
+              // onChange={e => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bssize="large">
+            <FormLabel className="FormLabel"> Password </FormLabel>
+            <FormControl
+              required="required"
+              name="password"
+              type="password"
+              // value={password}
+              // onChange={e => setPassword(e.target.value)}    
+            />
+          </FormGroup>
+          <Button type="submit">  Login </Button>
+          {/* disabled={!validateForm()} */}
+        </form>
+      </div>
+    );
+  }
+}
+const style = {
+ margin: 15,
+};
+export default Login;
