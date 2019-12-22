@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2019 at 09:26 PM
+-- Generation Time: Dec 22, 2019 at 08:58 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.0.23
 
@@ -43,7 +43,8 @@ CREATE TABLE `movie` (
 
 CREATE TABLE `movietimes` (
   `MovieName` varchar(250) NOT NULL,
-  `dateandtime` datetime NOT NULL
+  `dateandtime` datetime NOT NULL,
+  `ScreenId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,6 +66,7 @@ CREATE TABLE `screen` (
 --
 
 CREATE TABLE `screenseats` (
+  `ScreenID` int(11) NOT NULL,
   `ScreenNo` int(11) NOT NULL,
   `Row` int(11) NOT NULL,
   `Col` int(11) NOT NULL,
@@ -114,7 +116,8 @@ ALTER TABLE `movie`
 -- Indexes for table `movietimes`
 --
 ALTER TABLE `movietimes`
-  ADD PRIMARY KEY (`MovieName`,`dateandtime`);
+  ADD PRIMARY KEY (`MovieName`,`dateandtime`),
+  ADD KEY `FK_movietimes_01` (`ScreenId`);
 
 --
 -- Indexes for table `screen`
@@ -126,7 +129,8 @@ ALTER TABLE `screen`
 -- Indexes for table `screenseats`
 --
 ALTER TABLE `screenseats`
-  ADD PRIMARY KEY (`ScreenNo`,`Row`,`Col`);
+  ADD PRIMARY KEY (`ScreenID`,`Row`,`Col`),
+  ADD KEY `FK_screenno` (`ScreenNo`);
 
 --
 -- Indexes for table `ticket`
@@ -156,6 +160,7 @@ ALTER TABLE `movie`
 -- Constraints for table `movietimes`
 --
 ALTER TABLE `movietimes`
+  ADD CONSTRAINT `FK_movietimes_01` FOREIGN KEY (`ScreenId`) REFERENCES `screenseats` (`ScreenID`),
   ADD CONSTRAINT `movietimes_ibfk_1` FOREIGN KEY (`MovieName`) REFERENCES `movie` (`moviename`);
 
 --
