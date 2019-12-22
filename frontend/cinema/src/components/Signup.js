@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
-export class Signup extends Component {
+
+class Signup extends Component {
     constructor(props) {
         super(props)
     
@@ -14,93 +16,103 @@ export class Signup extends Component {
              Type:2
         }
     }
-    handleUsernameChange =(event)=> {
-        this.setState({
-            Username: event.target.value
-        })
+    changeHandler = (e)=>{
+        this.setState({[e.target.name]: e.target.value})
     }
-
-    handlePasswordChange=(event)=>{
-        this.setState({
-            Password: event.target.value
-        })
-    }
-    handleFirstnameChange =(event)=>{
-        this.setState({
-            Firstname: event.target.value
-        })
-    }
-    handleLastnameChange =(event)=>{
-        this.setState({
-            Lastname: event.target.value
-        })
-    }
-    handleBirthdayChange =(event)=>{
-        this.setState({
-            Birthday: event.target.value
-        })
-    }
-    handleEmailChange = (event)=>{
-        this.setState({
-            Email: event.target.value
-        })
-    }
+    
     handleSubmit =(event)=>{
-        alert(`Hello ${this.state.username}`)
+        // alert(`Hello ${this.state.Username}`)
         event.preventDefault()
+        console.log(this.state)
+        axios.post('http://localhost:8089/CinemaReservationSystem/backend/signup.php',this.state).then(response=>{
+            console.log(response)
+        }).catch(error=>{
+            console.log(error)
+        })
     }
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <div className="jumbotron">
+                    <h1>Sign Up For The Best Cinema Experience!</h1>
+                    <p> Tell us about yourself</p>
+                </div>
                 <div>
-                    <label>Username</label>
-                    <input required
+                    {/* <label>Username</label> */}
+                    <input required autoFocus
+                    className="form-control"
+                    placeholder="Username"
                     type='text' 
+                    name = 'Username'
                     value={this.state.username} 
-                    onChange={this.handleUsernameChange}
+                    onChange={this.changeHandler}
                     ></input>
                 </div>
+                <br></br>
                 <div>
-                    <label>Password</label>
+                    {/* <label>Password</label> */}
                     <input required
+                    className="form-control"
+                    placeholder="Password"
                     type='password'
+                    name='Password'
                     value={this.state.Password}
-                    onChange={this.handlePasswordChange}
+                    onChange={this.changeHandler}
                     ></input>
                 </div>
+                <br></br>
                 <div>
-                    <label>FirstName</label>
+                    {/* <label>FirstName</label> */}
                     <input required
+                    className="form-control"
+                    placeholder="First name"
                     type='text'
+                    name='Firstname'
                     value={this.state.Firstname}
-                    onChange={this.handleFirstnameChange}
+                    onChange={this.changeHandler}
                     ></input>
                 </div>
+                <br></br>
                 <div>
-                    <label>LastName</label>
+                    {/* <label>LastName</label> */}
                     <input required
+                    className="form-control"
+                    placeholder="Last name"
                     type='text'
+                    name='Lastname'
                     value={this.state.Lastname}
-                    onChange={this.handleLastnameChange}
+                    onChange={this.changeHandler}
                     ></input>
                 </div>
+                <br></br>
                 <div>
                     <label>Birthday</label>
                     <input required
-                    type='text'
+                    className="form-control"
+                    placeholder="Birthday"
+                    type='date'
+                    name='Birthday'
                     value={this.state.Birthday}
-                    onChange={this.handleBirthdayChange}
+                    onChange={this.changeHandler}
                     ></input>
                 </div>
+                <br></br>
                 <div>
-                    <label>Email</label>
+                    {/* <label>Email</label> */}
                     <input required
+                    className="form-control"
+                    placeholder="Email"
                     type='email'
+                    name='Email'
                     value={this.state.Email}
-                    onChange={this.handleEmailChange}
+                    onChange={this.changeHandler}
                     ></input>
                 </div>
-                <button type="submit">Sign UP</button>
+                <br></br>
+                <button 
+                className="btn btn-success"
+                type="submit"
+                >Sign UP</button>
             </form>
         )
     }
