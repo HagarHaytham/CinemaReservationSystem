@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `movie` (
   `moviename` varchar(250) NOT NULL,
   `genre` varchar(1000) NOT NULL,
-  `screenno` int(11) NOT NULL,
+  `screenID` int(11) NOT NULL,
   `movielength` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -110,7 +110,7 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `movie`
   ADD PRIMARY KEY (`moviename`),
-  ADD KEY `screenno` (`screenno`);
+  ADD KEY `screenID` (`screenID`);
 
 --
 -- Indexes for table `movietimes`
@@ -154,7 +154,7 @@ ALTER TABLE `user`
 -- Constraints for table `movie`
 --
 ALTER TABLE `movie`
-  ADD CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`screenno`) REFERENCES `screen` (`screenno`);
+  ADD CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`screenID`) REFERENCES `screenseats` (`screenID`);
 
 --
 -- Constraints for table `movietimes`
