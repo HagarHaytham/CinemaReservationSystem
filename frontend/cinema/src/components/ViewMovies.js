@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import ReactDOM from 'react-dom';
-// import $ from 'jquery';
 import {Link} from 'react-router-dom'
 
 class ViewMovies extends Component {
