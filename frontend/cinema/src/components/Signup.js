@@ -5,7 +5,6 @@ import axios from 'axios'
 class Signup extends Component {
     constructor(props) {
         super(props)
-    
         this.state = {
              Username:'',
              Password:'',
@@ -13,9 +12,12 @@ class Signup extends Component {
              Lastname:'',
              Birthday:'',
              Email:'',
-             Type:2
+             Type:2,
+             SignedUp: false
         }
     }
+
+
     changeHandler = (e)=>{
         this.setState({[e.target.name]: e.target.value})
     }
@@ -37,8 +39,16 @@ class Signup extends Component {
         axios.post('http://localhost:8089/CinemaReservationSystem/backend/signup.php',data).then(response=>{
             // var jsonData = JSON.parse(response);
             // alert(jsonData.message);
-            alert(response)
-            console.log(response)
+            alert(response.data)
+            var msg = response.data
+            // if (msg == 'you signed in successfully')
+            // {
+            //     this.homepage()
+            // }
+            // else{
+            //     alert(response.data)
+            // }
+            console.log(msg)
         }).catch(error=>{
             alert(error)
             console.log(error)

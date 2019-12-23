@@ -9,6 +9,7 @@ class AddMovieScreening extends Component {
             moviename :'',
             screens:[],
             screenno:'0',
+            datetime:'',
             errorMsg:''
         }
     }
@@ -31,23 +32,38 @@ class AddMovieScreening extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    
+    handleSubmit =(event)=>{
+        event.preventDefault()
+        var data = new FormData()
+        data.append('moviename', this.state.moviename)
+        data.append('screenno', this.state.screenno)
+        data.append('datetime',this.state.datetime)
+        axios.post('http://localhost:8089/CinemaReservationSystem/backend/addscreeningtime.php',data).then(response=>{
+            // var jsonData = JSON.parse(response);
+            // alert(jsonData.message);
+            alert(response)
+            console.log(response)
+        }).catch(error=>{
+            alert(error)
+            console.log(error)
+        })
+
+    }
     render() {
-        const {moviename,screens,screenno,errorMsg} = this.state
+        const {moviename,screens,screenno,datetime,errorMsg} = this.state
         return (
-            <div>
-                <div>
-                    {moviename}
+            <form onSubmit={this.handleSubmit}>
+                <div className="jumbotron">
+                    <h1>Add screening time for {moviename} movie!</h1>
                     {/* {this.props.match.params.id} */}
                 </div>
+
                 <div>
-                    <label>Screen Number</label>
-                    <select 
-                    value ={screenno}
-                    onChange={this.changeHandler}
-                    >
-                        {
-                    screens.map(screen=> 
+                    <label className="label label-default">Screen Number</label>
+                    <select className="form-control form-control-lg" required
+                        value ={screenno}
+                        onChange={this.changeHandler}>
+                    {screens.map(screen=> 
                         <option 
                         key={screen.screenno} 
                         value={screen.screenno}
@@ -57,8 +73,23 @@ class AddMovieScreening extends Component {
                         )}
                     </select>
                 </div>
-            
-            </div>
+                <br></br>
+                <div>
+                    <label>Birthday</label>
+                    <input required
+                    className="form-control"
+                    type='datetime-local'
+                    name='datetime'
+                    value={datetime}
+                    onChange={this.changeHandler}
+                    ></input>
+                </div>
+                <br></br>
+                <button 
+                className="btn btn-success"
+                type="submit"
+                >Add screening Time </button>
+            </form>
         )
     }
 }
