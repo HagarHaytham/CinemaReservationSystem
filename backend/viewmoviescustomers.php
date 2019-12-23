@@ -18,7 +18,6 @@ $arr =[];
 for ($i=0;$i<$result -> num_rows;$i++){
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     array_push($arr, $row);
-    // printf ("%s %s %s\n", $row["moviename"], $row["genre"],$row["movielength"]);
 }
 echo json_encode($arr);
 ?>
