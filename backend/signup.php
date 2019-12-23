@@ -18,7 +18,7 @@ if($_POST){
 
     $query ="INSERT INTO user VALUES('$username','$password','$firstname','$lastname','$date','$email','$type')";
     if(mysqli_query($conn,$query)){
-        echo 'you signed in successfully';
+        echo 1;
     }
     else{
         echo 'Username exists, please choose another username';

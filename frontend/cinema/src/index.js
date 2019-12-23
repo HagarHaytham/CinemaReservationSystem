@@ -27,7 +27,6 @@ const routing = (
       <Route path='/addmovie' component={AddMovie}/>
       <Route path='/viewmovies' exact component={ViewMovies}/>
       <Route path='/viewmovies/:id' component={AddMovieScreening} />
-
     </div>
   </Router>
 );
