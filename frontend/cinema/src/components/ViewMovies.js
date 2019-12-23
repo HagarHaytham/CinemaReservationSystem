@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
+// import ReactDOM from 'react-dom';
+// import $ from 'jquery';
+import {Link} from 'react-router-dom'
 
 class ViewMovies extends Component {
     constructor(props) {
@@ -52,10 +53,14 @@ class ViewMovies extends Component {
                         movies.length ?
                         movies.map(movie=> 
                         <tr key={movie.moviename}>
-                            <td>  {movie.moviename} </td> 
+                            <Link to={`/viewmovies/${movie.moviename}`}>
+                                <td>  {movie.moviename} </td> 
+                            </Link>
                             <td> {movie.genre} </td>
                             <td> {movie.movielength}</td>
-                        </tr>) :
+                            
+                        </tr>
+                        ) :
                         null
                     } 
                     </tbody>
