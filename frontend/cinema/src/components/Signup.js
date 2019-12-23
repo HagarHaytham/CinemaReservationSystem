@@ -41,10 +41,6 @@ class Signup extends Component {
             // alert(jsonData.message);
             // alert(response.data)
             console.log(response.data)
-            for (var i=0;i<response.data.length;i++)
-            {
-                console.log(response.data[i])
-            }
             if ( response.data ==1)
             {
                 console.log("HEEEEEEEEEH")

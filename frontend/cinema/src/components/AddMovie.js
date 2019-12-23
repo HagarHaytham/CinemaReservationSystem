@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Redirect} from "react-router-dom";
 
 class AddMovie extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ class AddMovie extends Component {
         this.state = {
              Moviename:'',
              Genre:'',
-             Movielength:''
+             Movielength:'',
+             MovieAdded:false
         }
     }
     changeHandler = (e)=>{
@@ -27,8 +29,16 @@ class AddMovie extends Component {
         axios.post('http://localhost:8089/CinemaReservationSystem/backend/addmovie.php',data).then(response=>{
             // var jsonData = JSON.parse(response);
             // alert(jsonData.message);
-            alert(response)
-            console.log(response)
+            // alert(response)
+            console.log(response.data)
+            if(response.data ==1){
+                alert("Movie added successfully")
+                this.setState({ MovieAdded: true })
+            }
+            else{
+                alert(response.data)
+            }
+
         }).catch(error=>{
             alert(error)
             console.log(error)
@@ -36,6 +46,9 @@ class AddMovie extends Component {
     }
     
     render() {
+        if(this.state.MovieAdded){
+            return <Redirect to='adminhomepage' />
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="jumbotron">
