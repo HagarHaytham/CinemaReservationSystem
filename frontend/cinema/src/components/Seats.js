@@ -20,47 +20,10 @@ componentDidMount() {
   // const values = queryString.parse(this.props.location.search)
   // console.log(values.filter) // "top"
   // console.log(values.origin) // "im"
-  // this.getScreen();
-  var apiBaseUrl = "http://localhost/backend/seats.php";
-  var payload= 'screenID='+ this.state.screenID;
-  // alert(payload);
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("POST", apiBaseUrl, true);
-  xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");     
-  xhttp.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-          var res = this.responseText.split(",");
-          this.setState({
-            rows : res[0],
-            cols : res[1],
-          });
+  this.getScreen();
+  this.createScreen();
+          
 
-
-          for( let i = 0 ;i<this.rows;i++){
-            this.AllSeats.push( new  Array(this.cols).fill('btn-primary'));
-        }
-
-
-        //--------------2.setting our reserved seats-------------//
-        for(let i = 0; i<this.reservedSeats.length; i++){
-            let resrvedRow = this.reservedSeats[i].row
-            let resrvedCol = this.reservedSeats[i].col
-            console.log(resrvedRow)
-
-            console.log(resrvedCol)
-            this.AllSeats[resrvedRow-1][resrvedCol-1] ='btn-danger';
-
-            console.log(this.AllSeats)
-        }
-// Convert data string to an object
-// var data = JSON.parse(xhr.responseText);
-// // Get the first item
-// var firstPost = data[0];
-
-// // Loop through each post
-// data.forEach(function (post) {
-// 	console.log(post);
-// });
 }
 
 getScreen(){
@@ -72,14 +35,41 @@ getScreen(){
   xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");     
   xhttp.onreadystatechange = function(){
     if (this.readyState === 4 && this.status === 200) {
-      var res = this.responseText.split(",");
-      this.setState({
-        rows : res[0],
-        cols : res[1],
-      });
+      // alert(this.responseText);
+      // var res = this.responseText.split(",");
+      // this.setState({
+      //   rows : res[0],
+      //   cols : res[1],
+      // });
+      // Convert data string to an object
+var data = JSON.parse(xhttp.responseText);
+// Get the first item
+var firstCell = data[0];
+
+// Loop through each cell
+data.forEach(function (cell) {
+	console.log(cell);
+});
     }
   };
   xhttp.send(payload);
+}
+
+createScreen(){
+  // for( let i = 0 ;i<this.rows;i++){
+  //   this.AllSeats.push( new  Array(this.cols).fill('btn-primary'));
+  // }
+  // //--------------2.setting our reserved seats-------------//
+  // for(let i = 0; i<this.reservedSeats.length; i++){
+  //     let resrvedRow = this.reservedSeats[i].row
+  //     let resrvedCol = this.reservedSeats[i].col
+  //     console.log(resrvedRow)
+
+  //     console.log(resrvedCol)
+  //     this.AllSeats[resrvedRow-1][resrvedCol-1] ='btn-danger';
+
+  //     console.log(this.AllSeats)
+  // }
 }
 
 // getCell(){
@@ -138,7 +128,7 @@ getScreen(){
     return (
       <div className="Seats">
         <div className="grid">
-          <Group></Group>
+          {/* <Group></Group> */}
           <button className="seat"> </button>
           <button className="seat"> </button>
 
