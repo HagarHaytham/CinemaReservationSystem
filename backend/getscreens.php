@@ -23,5 +23,5 @@ for ($i=0;$i<$result -> num_rows;$i++){
     // printf ("%s %s %s\n", $row["moviename"], $row["genre"],$row["movielength"]);
 }
 echo json_encode($arr);
-print_r($arr); 
+// print_r($arr); 
 ?> 
