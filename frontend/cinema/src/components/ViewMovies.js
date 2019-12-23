@@ -12,11 +12,6 @@ class ViewMovies extends Component {
              
         }
     }
-    // putMovies(){
-    //     for (var i = 0; i < this.state.movies.length; i++) {
-    //         $("#moviesTable").append($(' <tr  " class="w3-hover-text-indigo"> <td>' + this.state.movies[i].moviename + '</td> <td>' + this.state.movies[i].genre + '</td> <td>' + this.state.movies[i].movielength + '</td> </tr>'));
-    //     }
-    // }
 
     // only executed once in the life cycle of the component
     componentDidMount(){
@@ -36,6 +31,7 @@ class ViewMovies extends Component {
             <div>
                 <div className="jumbotron">
                     <h1>Our Movies </h1>
+                    <p> To add screening Times For any movie click its name</p>
                 </div>
                 <div className="table-responsive">
                     <table className="table table-hover"  >

@@ -29,6 +29,7 @@ class ViewMoviesCustomers extends Component {
             <div>
                 <div className="jumbotron">
                     <h1>Our Movies </h1>
+                    <p>To see available seats for a movie click on its name, Enjoy!</p>
                 </div>
                 <div className="table-responsive">
                     <table className="table table-hover"  >
