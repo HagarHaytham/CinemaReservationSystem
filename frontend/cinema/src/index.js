@@ -11,6 +11,8 @@ import ViewMovies from './components/ViewMovies'
 import AdminHomepage from './components/AdminHomepage'
 import CustomerHomePage from './components/CustomerHomePage'
 import AddMovieScreening from './components/AddMovieScreening'
+import ViewMoviesCustomers from './components/ViewMoviesCustomers'
+import Seats from './components/Seets'   // ----------->>> CHECK  
 
 // import '../bootstrap/bootstrap.min.css';
 // import '../bootstrap/bootstrap.min.js';
@@ -27,6 +29,9 @@ const routing = (
       <Route path='/addmovie' component={AddMovie}/>
       <Route path='/viewmovies' exact component={ViewMovies}/>
       <Route path='/viewmovies/:id' component={AddMovieScreening} />
+      <Route path='/viewmoviescustomers' exact component={ViewMoviesCustomers} />
+      <Route path='/viewmoviescustomers/:id' component={Seats}/> 
+      {/* CHECK LAST ROUTE  */}
     </div>
   </Router>
 );

@@ -7,7 +7,7 @@ class CustomerHomePage extends Component {
             <div>
                 <nav className="navbar navbar-light bg-light">
                     <form className="form-inline">
-                        <Link to='viewmovies'>
+                        <Link to='viewmoviescustomers'>
                         <button className="btn btn btn-outline-success" type="button">View Movies</button>
                         </Link>
                     </form>
