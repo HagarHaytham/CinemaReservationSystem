@@ -24,9 +24,23 @@ class Signup extends Component {
         // alert(`Hello ${this.state.Username}`)
         event.preventDefault()
         console.log(this.state)
-        axios.post('http://localhost:8089/CinemaReservationSystem/backend/signup.php',this.state).then(response=>{
+        // var data = { Username: this.state.Username, Password: this.state.Password,Firstname:this.state.Firstname, Lastname:this.state.Lastname,Birthday:this.state.Birthday,Email:this.state.Email,Type:this.state.Type}
+        // console.log(data['Username'])
+        var data = new FormData()
+        data.append('Username', this.state.Username)
+        data.append('Password', this.state.Password)
+        data.append('Firstname',this.state.Firstname)
+        data.append('Lastname',this.state.Lastname)
+        data.append('Birthday',this.state.Birthday)
+        data.append('Email',this.state.Email)
+        data.append('Type',this.state.Type)
+        axios.post('http://localhost:8089/CinemaReservationSystem/backend/signup.php',data).then(response=>{
+            // var jsonData = JSON.parse(response);
+            // alert(jsonData.message);
+            alert(response)
             console.log(response)
         }).catch(error=>{
+            alert(error)
             console.log(error)
         })
     }
