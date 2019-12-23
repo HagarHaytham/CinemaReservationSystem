@@ -46,5 +46,16 @@
     border: 2px solid darkgoldenrod;
     border-radius: 25px;
   }
+
+  .Seats{
+    background-image: url("../images/nicebgr.jpg");
+    width: 100%; height: 100%;
+    /* background-size:cover; */
+    position: absolute; top: 0; left: 0;
+  }
+
+  .grid{
+    flexWrap: "wrap"
+  }
 }
 
