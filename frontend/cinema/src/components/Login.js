@@ -15,7 +15,6 @@ class Login extends Component {
     event.preventDefault();
     var apiBaseUrl = "http://localhost/backend/login.php";
     var payload= 'username='+ this.state.username+ '&password='+this.state.password;
-
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", apiBaseUrl, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");     
@@ -43,8 +42,7 @@ class Login extends Component {
               type="text"
               required="required"
               name="username"
-              // value={email}
-              // onChange={e => setEmail(e.target.value)}
+              onChange={(event) => this.setState({username:event.target.value})}
             />
           </FormGroup>
           <FormGroup controlId="password" bssize="large">
@@ -53,8 +51,7 @@ class Login extends Component {
               required="required"
               name="password"
               type="password"
-              // value={password}
-              // onChange={e => setPassword(e.target.value)}    
+              onChange={(event) => this.setState({password:event.target.value})}   
             />
           </FormGroup>
           <Button type="submit">  Login </Button>

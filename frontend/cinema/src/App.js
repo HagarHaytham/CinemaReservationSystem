@@ -2,13 +2,15 @@
 // import logo from './logo.svg';
 import './App.css';
 // import Signup from './components/Signup'
-import Login from './components/Login'
+// import Login from './components/Login'
+// import Home from './components/Home'
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-          <Login />
+        {/* <Home /> */}
+          {/* <Login /> */}
           {/* <Signup></Signup> */}
         </div>
     );
