@@ -8,7 +8,7 @@
     $user = $stmt->fetch();
     if ($user) {
         // go to your page
-        echo "yaa";
+        echo $user['type'];
       } else {
         echo "please cheak your username and password and try again";
       }
