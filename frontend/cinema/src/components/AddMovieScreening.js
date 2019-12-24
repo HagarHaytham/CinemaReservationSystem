@@ -34,14 +34,14 @@ class AddMovieScreening extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     changeScreenNo =(e) =>{
-        this.setState({screenno:e.target.value +1})
+        this.setState({screenno:e.target.value})
     }
 
     handleSubmit =(event)=>{
         event.preventDefault()
         var data = new FormData()
         data.append('moviename', this.state.moviename)
-        data.append('screenno', this.state.screenno)
+        data.append('screenno', this.state.screenno+1)
         data.append('datetime',this.state.datetime)
         console.log(this.state.moviename)
         console.log(this.state.screenno)
