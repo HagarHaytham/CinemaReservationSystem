@@ -1,29 +1,49 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "../css/Login.css";
+import axios from 'axios'
+import {Redirect} from "react-router-dom";
 
 class Login extends Component {
   constructor(props){
     super(props);
     this.state={
       username: '',
-      password: ''
+      password: '',
+      type:0,
+      logged_in: false
     }
   }
 
   handleSubmit(event){
-    event.preventDefault();
-    var apiBaseUrl = "http://localhost/backend/login.php";
-    var payload= 'username='+ this.state.username+ '&password='+this.state.password;
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", apiBaseUrl, true);
-    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");     
-    xhttp.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            alert(this.responseText);
+    event.preventDefault()
+    console.log(this.state)
+   // console.log(data['Username'])
+    var data = new FormData()
+    
+    data.append('username',this.state.username)
+    data.append('password',this.state.password)
+    axios.post("http://localhost/backend/login.php",data).then(response=>{
+        // var jsonData = JSON.parse(response);
+        // alert(jsonData.message);
+        // alert(response.data)
+        console.log(response.data)
+        if ( response.data ==1)
+        {
+          // alert(this.responseText);
+          this.setState({ logged_in: true })
+          this.setState({ type: response.data })
         }
-    };
-    xhttp.send(payload);
+        else{
+            console.log("LEEH")
+            console.log(response.data)
+            console.log("LEEH")
+            alert(response.data)
+        }
+    }).catch(error=>{
+        alert(error)
+        console.log(error)
+    })
   }
 
   componentDidMount(){
@@ -31,6 +51,12 @@ class Login extends Component {
   }
 
   render(){
+    if (this.state.logged_in && this.state.type==1){
+      return <Redirect to='/adminhomepage' />
+  }
+  if (this.state.logged_in && this.state.type==2){
+    return <Redirect to='/customerhomepage' />
+}
     return (
       <div className="Login">
         {/* <form onSubmit={handleSubmit}> */}

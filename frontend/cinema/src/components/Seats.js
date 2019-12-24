@@ -13,7 +13,7 @@ class Seats extends Component {
     super(props);
     this.state={
       // username: '',
-      screenID: 1,  
+      screenID: 0,  
       // {this.props.match.params.id}
       rows: 0,
       cols: 0,
@@ -26,6 +26,7 @@ class Seats extends Component {
   }
 
   componentDidMount() {
+    this.setState({screenID: this.props.match.params.id})
     this.getScreenInfo()
   }
 

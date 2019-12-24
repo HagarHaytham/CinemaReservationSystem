@@ -29,7 +29,7 @@ const routing = (
       <Route path='/viewmovies/:id' component={AddMovieScreening} />
       <Route path='/viewmoviescustomers' exact component={ViewMoviesCustomers} />
       <Route path='/viewmoviescustomers/:id' component={Seats}/> 
-      <Route path="/seats" component={Seats} />
+      {/* <Route path="/seats" component={Seats} /> */}
       {/* CHECK LAST ROUTE  */}
     </div>
   </Router>
