@@ -15,3 +15,4 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     echo  json_encode($row);
+?>

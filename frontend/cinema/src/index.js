@@ -11,7 +11,7 @@ import './index.css';
 import AddMovie from './components/AddMovie'
 import ViewMovies from './components/ViewMovies'
 import AdminHomepage from './components/AdminHomepage'
-// import CustomerHomePage from './components/CustomerHomePage'
+import CustomerHomePage from './components/CustomerHomePage'
 import AddMovieScreening from './components/AddMovieScreening'
 import ViewMoviesCustomers from './components/ViewMoviesCustomers'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -23,7 +23,7 @@ const routing = (
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path='/adminhomepage' component={AdminHomepage}/>
-      {/* <Route path='/customerhomepage' component={CustomerHomePage}/> */}
+      <Route path='/customerhomepage' component={CustomerHomePage}/>
       <Route path='/addmovie' component={AddMovie}/>
       <Route path='/viewmovies' exact component={ViewMovies}/>
       <Route path='/viewmovies/:id' component={AddMovieScreening} />

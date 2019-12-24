@@ -7,10 +7,10 @@ class AdminHomepage extends Component {
             <div>
                 <nav className="navbar navbar-light bg-light">
                     <form className="form-inline">
-                        <Link to='/addmovie'>
+                        <Link to='/viewmovies'>
                             <button className="btn btn-outline-success" type="button">View Movies</button>
                         </Link>
-                        <Link to='viewmovies'>
+                        <Link to='/addmovie'>
                         <button className="btn btn btn-outline-success" type="button">Add Movie</button>
                         </Link>
                     </form>

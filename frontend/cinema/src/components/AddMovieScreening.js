@@ -66,7 +66,7 @@ class AddMovieScreening extends Component {
     render() {
         const {moviename,screens,screenno,datetime,MovieScreeningAdded,errorMsg} = this.state
         if(MovieScreeningAdded){
-            return <Redirect to='adminhomepage' />
+            return <Redirect to='/adminhomepage' />
         }
         return (
             <form onSubmit={this.handleSubmit}>

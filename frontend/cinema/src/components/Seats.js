@@ -1,6 +1,6 @@
 import React, { Component, View } from "react";
 // import queryString from 'query-string'
-import Seatmap from 'react-seatmap';
+// import Seatmap from 'react-seatmap';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import "../css/Login.css";
@@ -13,7 +13,7 @@ class Seats extends Component {
     super(props);
     this.state={
       // username: '',
-      screenID: 0,  
+      screenID: 1,  
       // {this.props.match.params.id}
       rows: 0,
       cols: 0,
@@ -26,7 +26,8 @@ class Seats extends Component {
   }
 
   componentDidMount() {
-    this.setState({screenID: this.props.match.params.id})
+    // this.setState({screenID: this.props.match.params.id})
+    console.log(this.state.screenID)
     this.getScreenInfo()
   }
 
@@ -34,7 +35,7 @@ class Seats extends Component {
   {
     var data = new FormData()
     data.append('screenID', this.state.screenID)
-    axios.post('http://localhost/backend/reservedSeats.php', data)
+    axios.post('http://localhost:8089/CinemaReservationSystem/backend/reservedSeats.php', data)
     .then(response=>{
         this.setState({reserved:response.data})
         this.updateStyle()
@@ -48,7 +49,7 @@ class Seats extends Component {
   getScreenInfo(){
     var data = new FormData()
     data.append('screenID', this.state.screenID)
-     axios.post("http://localhost/backend/screenInfo.php",data)
+     axios.post("http://localhost:8089/CinemaReservationSystem/backend/screenInfo.php",data)
     .then(response=>{
         this.setState({rows:response.data.rows, cols:response.data.columns})
          this.createScreen()   
@@ -91,28 +92,30 @@ class Seats extends Component {
       for( let i = 0; i < this.state.reserved.length; i++){
         let row_res = this.state.reserved[i].Row;
         let col_res = this.state.reserved[i].Col;
+        console.log(row_res,col_res)
         if(row_res == row && col_res == col){
           alert("Sorry, this is a reserved seat")
+          return;
         }
-        else{
-          alert("OK will reserve it for you")
-          var data = new FormData()
-          data.append('screenID', this.state.screenID)
-          data.append('row', row)
-          data.append('col', col)
-          // console.log( this.state.row, this.state.col)
-          axios.post("http://localhost/backend/reserve.php",data)
-          .then(response=>{
-            console.log(response.data)
-            this.getReservedSeats()
-              // this.setState({rows:response.data.rows, cols:response.data.columns})  
-          })
+      }
+      {
+        alert("OK will reserve it for you")
+        var data = new FormData()
+        data.append('screenID', this.state.screenID)
+        data.append('row', row)
+        data.append('col', col)
+        // console.log( this.state.row, this.state.col)
+        axios.post("http://localhost:8089/CinemaReservationSystem/backend/reserve.php",data)
+        .then(response=>{
+          console.log(response.data)
+          this.getReservedSeats()
+            // this.setState({rows:response.data.rows, cols:response.data.columns})  
+        })
           .catch(error=>{
               console.log(error)
               this.setState({errorMsg:'Error retreiving data'})
           })
         }
-  }
 
 }
   render(){

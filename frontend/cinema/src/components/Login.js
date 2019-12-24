@@ -23,12 +23,12 @@ class Login extends Component {
     
     data.append('username',this.state.username)
     data.append('password',this.state.password)
-    axios.post("http://localhost/backend/login.php",data).then(response=>{
+    axios.post("http://localhost:8089/CinemaReservationSystem/backend/login.php",data).then(response=>{
         // var jsonData = JSON.parse(response);
         // alert(jsonData.message);
         // alert(response.data)
         console.log(response.data)
-        if ( response.data ==1)
+        if ( response.data ==1 ||  response.data ==2)
         {
           // alert(this.responseText);
           this.setState({ logged_in: true })
