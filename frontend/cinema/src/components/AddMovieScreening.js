@@ -33,6 +33,9 @@ class AddMovieScreening extends Component {
     changeHandler = (e)=>{
         this.setState({[e.target.name]: e.target.value})
     }
+    changeScreenNo =(e) =>{
+        this.setState({screenno:e.target.value +1})
+    }
 
     handleSubmit =(event)=>{
         event.preventDefault()
@@ -40,6 +43,9 @@ class AddMovieScreening extends Component {
         data.append('moviename', this.state.moviename)
         data.append('screenno', this.state.screenno)
         data.append('datetime',this.state.datetime)
+        console.log(this.state.moviename)
+        console.log(this.state.screenno)
+        console.log(this.state.datetime)
         axios.post('http://localhost:8089/CinemaReservationSystem/backend/addscreeningtime.php',data).then(response=>{
             // var jsonData = JSON.parse(response);
             // alert(jsonData.message);
@@ -59,7 +65,7 @@ class AddMovieScreening extends Component {
     }
     render() {
         const {moviename,screens,screenno,datetime,MovieScreeningAdded,errorMsg} = this.state
-        if(this.state.MovieScreeningAdded){
+        if(MovieScreeningAdded){
             return <Redirect to='adminhomepage' />
         }
         return (
@@ -73,7 +79,8 @@ class AddMovieScreening extends Component {
                     <label className="label label-default">Screen Number</label>
                     <select className="form-control form-control-lg" required
                         value ={screenno}
-                        onChange={this.changeHandler}>
+                        name='screenno'
+                        onChange={this.changeScreenNo}>
                     {screens.map(screen=> 
                         <option 
                         key={screen.screenno} 
@@ -86,7 +93,7 @@ class AddMovieScreening extends Component {
                 </div>
                 <br></br>
                 <div>
-                    <label>Birthday</label>
+                    <label>Date and time of screening</label>
                     <input required
                     className="form-control"
                     type='datetime-local'
