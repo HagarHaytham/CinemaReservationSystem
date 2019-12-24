@@ -2,20 +2,17 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
-class ViewMovies extends Component {
+class ViewMoviesCustomers extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-            movies:[],
-            errorMsg:''
-             
+             movies:[],
+             ereorMsg:''
         }
     }
-
-    // only executed once in the life cycle of the component
     componentDidMount(){
-        axios.get('http://localhost:8089/CinemaReservationSystem/backend/viewmovies.php')
+        axios.get('http://localhost:8089/CinemaReservationSystem/backend/viewmoviescustomers.php')
         .then(response=>{
             console.log(response)
             this.setState({movies:response.data})
@@ -25,19 +22,22 @@ class ViewMovies extends Component {
             this.setState({errorMsg:'Error retreiving data'})
         })
     }
+    
     render() {
         const {movies,errorMsg} = this.state
         return (
             <div>
                 <div className="jumbotron">
                     <h1>Our Movies </h1>
-                    <p> To add screening Times For any movie click its name</p>
+                    <p>To see available seats for a movie click on its name, Enjoy!</p>
                 </div>
                 <div className="table-responsive">
                     <table className="table table-hover"  >
                         <thead >
                             <tr>
                                 <th>Movie name</th>
+                                <th>Date and time</th>
+                                <th> Screen No</th>
                                 <th>Genre</th>
                                 <th>Movie Length</th>
                             </tr>
@@ -46,11 +46,13 @@ class ViewMovies extends Component {
                     {
                         movies.length ?
                         movies.map(movie=> 
-                        <tr key={movie.moviename}>
-                            <Link to={`/viewmovies/${movie.moviename}`}>
+                        <tr key={movie.ScreenID}>
+                            <Link to={`/viewmoviescustomers/${movie.ScreenID}`}>
                                 <td>  {movie.moviename} </td> 
                             </Link>
-                            <td> {movie.genre} </td>
+                            <td> {movie.dateandtime}</td>
+                            <td> {movie.ScreenNo}</td>
+                            <td> {movie.genre}</td>
                             <td> {movie.movielength}</td>
                             
                         </tr>
@@ -66,4 +68,4 @@ class ViewMovies extends Component {
     }
 }
 
-export default ViewMovies
+export default ViewMoviesCustomers

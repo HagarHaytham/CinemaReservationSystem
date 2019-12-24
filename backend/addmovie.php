@@ -10,7 +10,7 @@ $movielength = $_POST['Movielength'];
 
 $query ="INSERT INTO movie (`moviename`, `genre`, `movielength`)VALUES ('$moviename', '$genre', '$movielength')";
 if(mysqli_query($conn,$query)){
-    echo 'movie added';
+    echo 1;
 }
 else{
     echo 'This movie already exists';

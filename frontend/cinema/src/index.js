@@ -13,7 +13,7 @@ import ViewMovies from './components/ViewMovies'
 import AdminHomepage from './components/AdminHomepage'
 // import CustomerHomePage from './components/CustomerHomePage'
 import AddMovieScreening from './components/AddMovieScreening'
-
+import ViewMoviesCustomers from './components/ViewMoviesCustomers'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const routing = (
@@ -26,9 +26,11 @@ const routing = (
       {/* <Route path='/customerhomepage' component={CustomerHomePage}/> */}
       <Route path='/addmovie' component={AddMovie}/>
       <Route path='/viewmovies' exact component={ViewMovies}/>
-      {/* <Route path='/viewmovies/:id' component={AddMovieScreening} /> */}
+      <Route path='/viewmovies/:id' component={AddMovieScreening} />
+      <Route path='/viewmoviescustomers' exact component={ViewMoviesCustomers} />
+      <Route path='/viewmoviescustomers/:id' component={Seats}/> 
       <Route path="/seats" component={Seats} />
-
+      {/* CHECK LAST ROUTE  */}
     </div>
   </Router>
 );

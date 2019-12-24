@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import {Redirect} from "react-router-dom";
 
 class Signup extends Component {
     constructor(props) {
@@ -39,22 +39,28 @@ class Signup extends Component {
         axios.post('http://localhost:8089/CinemaReservationSystem/backend/signup.php',data).then(response=>{
             // var jsonData = JSON.parse(response);
             // alert(jsonData.message);
-            alert(response.data)
-            var msg = response.data
-            // if (msg == 'you signed in successfully')
-            // {
-            //     this.homepage()
-            // }
-            // else{
-            //     alert(response.data)
-            // }
-            console.log(msg)
+            // alert(response.data)
+            console.log(response.data)
+            if ( response.data ==1)
+            {
+                console.log("HEEEEEEEEEH")
+                this.setState({ SignedUp: true })
+            }
+            else{
+                console.log("LEEH")
+                console.log(response.data)
+                console.log("LEEH")
+                alert(response.data)
+            }
         }).catch(error=>{
             alert(error)
             console.log(error)
         })
     }
     render() {
+        if (this.state.SignedUp){
+            return <Redirect to='/customerhomepage' />
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="jumbotron">

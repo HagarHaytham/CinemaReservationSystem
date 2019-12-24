@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
+import {Link } from 'react-router-dom'
 
 class CustomerHomePage extends Component {
     render() {
         return (
             <div>
-                <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                        <Link to='/addmovie'>
-                            <button class="btn btn-outline-success" type="button">View Movies</button>
-                        </Link>
-                        <Link to='viewmovies'>
-                        <button class="btn btn btn-outline-success" type="button">Add Movie</button>
+                <nav className="navbar navbar-light bg-light">
+                    <form className="form-inline">
+                        <Link to='viewmoviescustomers'>
+                        <button className="btn btn btn-outline-success" type="button">View Movies</button>
                         </Link>
                     </form>
                 </nav>

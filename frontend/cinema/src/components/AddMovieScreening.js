@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Redirect} from "react-router-dom";
 
 class AddMovieScreening extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class AddMovieScreening extends Component {
             screens:[],
             screenno:'0',
             datetime:'',
+            MovieScreeningAdded:false,
             errorMsg:''
         }
     }
@@ -41,8 +43,14 @@ class AddMovieScreening extends Component {
         axios.post('http://localhost:8089/CinemaReservationSystem/backend/addscreeningtime.php',data).then(response=>{
             // var jsonData = JSON.parse(response);
             // alert(jsonData.message);
-            alert(response)
-            console.log(response)
+            console.log(response.data)
+            if(response.data ==1){
+                alert("Movie added successfully")
+                this.setState({ MovieScreeningAdded: true })
+            }
+            else{
+                alert(response.data)
+            }
         }).catch(error=>{
             alert(error)
             console.log(error)
@@ -50,7 +58,10 @@ class AddMovieScreening extends Component {
 
     }
     render() {
-        const {moviename,screens,screenno,datetime,errorMsg} = this.state
+        const {moviename,screens,screenno,datetime,MovieScreeningAdded,errorMsg} = this.state
+        if(this.state.MovieScreeningAdded){
+            return <Redirect to='adminhomepage' />
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="jumbotron">
